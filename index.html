@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Galerie de films</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Films que j'ai vu</h1>
+    <p>Choisis une affiche pour voir la page dédiée au film.</p>
+  </header>
+
+  <main class="container">
+    <section id="gallery" class="grid"></section>
+  </main>
+
+
+  <script src="js/films.generated.js"></script>
+  <script>
+  const gallery = document.getElementById('gallery');
+
+  function slugifyLocal(s) {
+    const str = String(s || '');
+    const norm = (str && str.normalize) ? str.normalize('NFD').replace(/[\u0300-\u036f]/g,'') : str;
+    return norm.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');
+  }
+
+  (window.filmsData || []).forEach(film => {
+    const slug = film.slug || slugifyLocal(film.id || film.title || '');
+    const card = document.createElement('a');
+    card.className = 'card';
+    card.href = `film.html?id=${encodeURIComponent(slug)}`;
+    card.innerHTML = `
+      <div class="poster" style="background-image: url('${film.poster}')"></div>
+      <div class="meta">
+        <h3>${film.title}</h3>
+        <p class="desc">${film.description || ''}</p>
+      </div>
+    `;
+    gallery.appendChild(card);
+  });
+</script>
+</body>
+</html>

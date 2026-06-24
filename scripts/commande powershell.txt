@@ -1,0 +1,2 @@
+cd C:\Users\alexa\Documents\Films
+.\scripts\generate-manifest.ps1

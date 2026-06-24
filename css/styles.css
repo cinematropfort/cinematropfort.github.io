@@ -1,0 +1,202 @@
+:root{
+  --bg:#0f0f12;
+  --card:#111217;
+  --accent:#e67e22;
+  --text:#e6e7ea;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:linear-gradient(180deg,var(--bg), #070708);
+  color:var(--text);
+  min-height:100vh;
+}
+
+.container{
+  max-width:1200px;
+  margin:20px auto;
+  padding:16px;
+}
+
+.site-header, .film-header{
+  background:transparent;
+  padding:16px;
+  text-align:center;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:16px;
+  margin-top:16px;
+}
+
+.card{
+  display:block;
+  text-decoration:none;
+  color:inherit;
+  background:var(--card);
+  border-radius:8px;
+  overflow:hidden;
+  transition:transform .18s ease, box-shadow .18s ease;
+  box-shadow:0 2px 8px rgba(0,0,0,.5);
+}
+.card:hover{ transform:translateY(-6px); box-shadow:0 10px 30px rgba(0,0,0,.6); }
+
+.poster{
+  background-size:cover;
+  background-position:center;
+  height:260px;
+  width:100%;
+}
+.card .meta{
+  padding:10px;
+}
+.card h3{ margin:0 0 6px 0; font-size:1rem; }
+.card .desc{ margin:0; font-size:.85rem; color:#bfc1c6; }
+
+/* Film page */
+.film-page{
+  display:grid;
+  grid-template-columns: 1fr 320px;
+  gap:20px;
+  align-items:start;
+}
+
+/* zone générale du slideshow */
+.slideshow-area{
+  position:relative;
+  background:rgba(10,10,12,.5);
+  border-radius:10px;
+  padding:14px;
+}
+
+/* Fullscreen adjustments (standard + vendor prefixes)
+   La zone devient fixe et couvre tout l'écran. */
+.slideshow-area:fullscreen,
+.slideshow-area:-webkit-full-screen,
+.slideshow-area:-moz-full-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+}
+
+/* En fullscreen, faire la slideshow occuper tout l'espace disponible */
+.slideshow-area:fullscreen .slideshow,
+.slideshow-area:-webkit-full-screen .slideshow,
+.slideshow-area:-moz-full-screen .slideshow {
+  height: 100%;
+  max-height: none;
+  border-radius: 0;
+}
+
+/* zone du slideshow normale */
+.slideshow{
+  position:relative;
+  height:60vh;
+  min-height:320px;
+  max-height:800px;
+  overflow:hidden;
+  border-radius:6px;
+  background:#000;
+}
+
+/* images : couvrent la zone, centrées */
+.slideshow img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover; /* cover donne rendu plein écran sans barres noires */
+  opacity:0;
+  transition:opacity .6s ease;
+  will-change:opacity;
+}
+
+.slideshow img.show{
+  opacity:1;
+}
+
+/* Controls default */
+.controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 0;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.controls button{
+  background:var(--card);
+  color:var(--text);
+  border:1px solid rgba(255,255,255,.04);
+  padding:8px 12px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* When in fullscreen, overlay controls and audio */
+.slideshow-area:fullscreen .controls,
+.slideshow-area:-webkit-full-screen .controls,
+.slideshow-area:-moz-full-screen .controls {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(0,0,0,0.35);
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* audio controls overlay in fullscreen */
+.slideshow-area:fullscreen .audio-controls,
+.slideshow-area:-webkit-full-screen .audio-controls,
+.slideshow-area:-moz-full-screen .audio-controls {
+  position: absolute;
+  left: 12px;
+  bottom: 72px;
+  background: rgba(0,0,0,0.25);
+  padding: 8px;
+  border-radius: 6px;
+}
+
+/* audio controls (normal) */
+.audio-controls{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-top:8px;
+  flex-wrap:wrap;
+}
+.audio-controls audio{ width:320px; max-width:100%; }
+
+.film-info{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  padding:12px;
+  border-radius:8px;
+  text-align:left;
+  z-index: 1;
+}
+.film-info img{ width:100%; border-radius:6px; display:block; margin-bottom:8px; }
+.film-info h2{ margin:6px 0; }
+.hint{ color:#9da0a6; font-size:.85rem }
+
+/* responsive */
+@media (max-width:900px){
+  .film-page{ grid-template-columns: 1fr; }
+  .slideshow{ height:50vh; }
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Film — page</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="film-header">
+    <a class="back" href="index.html">← Retour</a>
+    <h1 id="film-title">Film</h1>
+  </header>
+
+  <main class="container film-page">
+    <!-- Ajout d'un id pour pouvoir passer la zone entière en fullscreen -->
+    <section id="slideshowArea" class="slideshow-area">
+      <div id="slideshow" class="slideshow">
+        <!-- Images injectées ici -->
+      </div>
+
+      <div class="controls">
+        <div class="left-controls">
+          <button id="prevBtn" title="Image précédente">⟨</button>
+          <button id="playPauseBtn" title="Lecture / Pause">⏵</button>
+          <button id="nextBtn" title="Image suivante">⟩</button>
+          <label><input id="loopToggle" type="checkbox"> Boucle</label>
+          <!-- Bouton plein écran -->
+          <button id="fullscreenBtn" title="Plein écran">⛶</button>
+        </div>
+
+        <div class="right-controls">
+          <label>Vitesse (s): <input id="speedRange" type="range" min="1" max="20" value="5"></label>
+          <label>Transition (ms): <input id="transRange" type="range" min="100" max="2000" value="600"></label>
+        </div>
+      </div>
+
+      <div class="audio-controls">
+        <audio id="audio" controls preload="metadata"></audio>
+        <label>Vitesse audio: <input id="audioRate" type="range" min="0.5" max="2" step="0.1" value="1"></label>
+      </div>
+
+      <div class="status">
+        <span id="indexIndicator"></span>
+      </div>
+    </section>
+
+    <aside class="film-info">
+      <img id="film-poster" alt="affiche" />
+      <h2 id="film-subtitle"></h2>
+      <p id="film-desc"></p>
+    </aside>
+  </main>
+
+  <script src="js/films.generated.js"></script>
+  <script src="js/film.js"></script>
+</body>
+</html>
