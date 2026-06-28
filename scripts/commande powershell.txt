@@ -1,2 +1,4 @@
 cd C:\Users\alexa\Documents\Films
 .\scripts\generate-manifest.ps1
+cd C:\Users\alexa\Documents\GitHub\cinematropfort.github.io
+.\scripts\generate-manifest.ps1
